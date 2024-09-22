@@ -158,9 +158,12 @@ func TestDefaultEctoLogFunc(t *testing.T) {
 
 	DefaultEctoLogFunc(msg)
 
+	// Remove the timestamp prefix and newline
+	logJSON := logOutput[20 : len(logOutput)-1]
+
 	// Parse the JSON output
 	var parsedOutput map[string]interface{}
-	err := json.Unmarshal([]byte(logOutput), &parsedOutput)
+	err := json.Unmarshal([]byte(logJSON), &parsedOutput)
 	require.NoError(t, err)
 
 	// Assert the parsed output

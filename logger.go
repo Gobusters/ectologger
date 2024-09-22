@@ -38,7 +38,7 @@ func DefaultEctoLogFunc(msg EctoLogMessage) {
 	jsonMsg := make(map[string]interface{}, len(msg.Fields)+4) // Pre-allocate map with estimated size
 	jsonMsg["level"] = msg.Level
 	jsonMsg["message"] = msg.Message
-	jsonMsg["err"] = msg.Err
+	jsonMsg["err"] = msg.Err.Error()
 	jsonMsg["time"] = time.Now().Format(time.RFC3339)
 
 	jsonMsg = ectolinq.Merge(jsonMsg, msg.Fields)
